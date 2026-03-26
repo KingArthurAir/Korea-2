@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Stock Doctor | 智能投资顾问</title>
+  <meta name="description" content="AI 驱动的股票分析专家，每日精准推荐高潜力个股">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'serif': ['"Noto Serif SC"', 'serif'],
+            'sans': ['"Noto Sans SC"', 'sans-serif'],
+          },
+          colors: {
+            'deep-blue': '#0a1628',
+            'navy': '#1a2744',
+            'steel': '#2d3f5e',
+            'gold': '#c9a959',
+            'gold-light': '#d4b76e',
+            'cream': '#f8f6f0',
+            'success': '#10b981',
+            'success-dark': '#059669',
+          },
+          boxShadow: {
+            'glow': '0 0 40px rgba(201, 169, 89, 0.3)',
+            'glow-lg': '0 0 60px rgba(201, 169, 89, 0.4)',
+          },
+          backgroundImage: {
+            'gradient-radial': 'radial-gradient(ellipse at center, var(--tw-gradient-stops))',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Hero animation */
+    .hero-fade {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: heroFade 1s ease-out forwards;
+    }
+    
+    .hero-fade-delay-1 { animation-delay: 0.2s; }
+    .hero-fade-delay-2 { animation-delay: 0.4s; }
+    .hero-fade-delay-3 { animation-delay: 0.6s; }
+    
+    @keyframes heroFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Pulse animation for CTA */
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 40px rgba(201, 169, 89, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 60px rgba(201, 169, 89, 0.5);
+      }
+    }
+    
+    /* Card hover effect */
+    .feature-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Stat number animation */
+    .stat-number {
+      background: linear-gradient(135deg, #c9a959 0%, #f4e5b8 50%, #c9a959 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    /* Gradient background */
+    .bg-gradient-animated {
+      background: linear-gradient(-45deg, #0a1628, #1a2744, #2d3f5e, #0a1628);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Floating animation */
+    .float {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    /* Chart line animation */
+    .chart-line {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: drawLine 3s ease-out forwards;
+    }
+    
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
+  </style>
+</head>
+<body class="bg-deep-blue text-white font-sans overflow-x-hidden">
+  
+  <!-- HERO SECTION -->
+  <section class="min-h-screen flex items-center justify-center px-6 py-24 relative overflow-hidden bg-gradient-animated">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gold rounded-full blur-3xl float"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold rounded-full blur-3xl float" style="animation-delay: -3s;"></div>
+    </div>
+    
+    <!-- Grid pattern overlay -->
+    <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(rgba(201, 169, 89, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(201, 169, 89, 0.3) 1px, transparent 1px); background-size: 60px 60px;"></div>
+    
+    <div class="max-w-6xl mx-auto text-center relative z-10">
+      <!-- Badge -->
+      <div class="hero-fade inline-block mb-8 px-6 py-2 border border-gold/30 rounded-full bg-gold/10 backdrop-blur-sm">
+        <span class="text-gold text-sm tracking-widest uppercase">AI 驱动 · 专业投顾</span>
+      </div>
+      
+      <!-- Main Headline -->
+      <h1 class="hero-fade hero-fade-delay-1 font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8">
+        每日精选潜力股<br/>
+        <span class="stat-number">轻松收获超额收益</span>
+      </h1>
+      
+      <!-- Subheadline -->
+      <p class="hero-fade hero-fade-delay-2 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-12">
+        基于 AI 大数据的智能选股系统，为您精准捕捉市场机会。<br/>
+        无需研究 K 线，不用分析财报，优质标的直接送达。
+      </p>
+      
+      <!-- CTA Buttons -->
+      <div class="hero-fade hero-fade-delay-3 flex flex-col md:flex-row gap-6 justify-center items-center">
+        <a href="#join" class="pulse-glow inline-flex items-center gap-3 bg-gradient-to-r from-gold to-gold-light text-deep-blue font-bold px-10 py-5 rounded-full text-lg transition-all duration-300 hover:scale-105 shadow-glow">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          立即免费加入
+        </a>
+        <a href="#features" class="inline-flex items-center gap-2 border border-gray-500 text-gray-300 hover:text-white hover:border-white px-8 py-4 rounded-full transition-all duration-300">
+          了解服务详情
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </a>
+      </div>
+      
+      <!-- Trust indicators -->
+      <div class="hero-fade hero-fade-delay-3 mt-16 flex flex-wrap justify-center gap-8 text-gray-400 text-sm">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span>完全免费</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span>每日更新</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span>专业团队</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <svg class="w-8 h-8 text-gold/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
+    </div>
+  </section>
+  
+  <!-- STATS SECTION -->
+  <section class="py-24 px-6 bg-navy border-y border-gold/10">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <!-- Stat 1 -->
+        <div class="text-center">
+          <div class="stat-number font-serif text-6xl md:text-7xl font-bold mb-4">85%</div>
+          <p class="text-gray-400 text-lg">推荐个股平均涨幅</p>
+        </div>
+        <!-- Stat 2 -->
+        <div class="text-center">
+          <div class="stat-number font-serif text-6xl md:text-7xl font-bold mb-4">300%</div>
+          <p class="text-gray-400 text-lg">会员年均收益率</p>
+        </div>
+        <!-- Stat 3 -->
+        <div class="text-center">
+          <div class="stat-number font-serif text-6xl md:text-7xl font-bold mb-4">10K+</div>
+          <p class="text-gray-400 text-lg">活跃投资者信赖</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FEATURES SECTION -->
+  <section id="features" class="py-32 px-6 bg-deep-blue">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-20">
+        <div class="inline-block px-4 py-2 border border-gold/30 rounded-full bg-gold/10 mb-6">
+          <span class="text-gold text-sm tracking-widest uppercase">核心服务</span>
+        </div>
+        <h2 class="font-serif text-4xl md:text-6xl font-bold mb-6">
+          为什么选择我们
+        </h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-gold to-transparent mx-auto"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Feature 1 -->
+        <div class="feature-card bg-navy/50 backdrop-blur-sm rounded-2xl p-8 md:p-10 border border-gold/10">
+          <div class="w-16 h-16 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-deep-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-2xl md:text-3xl font-bold mb-4">精准买卖点提示</h3>
+          <p class="text-gray-400 leading-relaxed">不再纠结何时进场、何时离场。我们提供明确的买入价、目标价和止损位，让操作更从容。</p>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="feature-card bg-navy/50 backdrop-blur-sm rounded-2xl p-8 md:p-10 border border-gold/10">
+          <div class="w-16 h-16 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-deep-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-2xl md:text-3xl font-bold mb-4">个性化投资策略</h3>
+          <p class="text-gray-400 leading-relaxed">根据您的风险偏好和资金规模，定制专属投资方案。保守型、稳健型、激进型，总有一款适合您。</p>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="feature-card bg-navy/50 backdrop-blur-sm rounded-2xl p-8 md:p-10 border border-gold/10">
+          <div class="w-16 h-16 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-deep-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-2xl md:text-3xl font-bold mb-4">风险控制优先</h3>
+          <p class="text-gray-400 leading-relaxed">我们深知本金安全的重要性。每只推荐个股都经过严格筛选，设置合理止损，让亏损可控、盈利可期。</p>
+        </div>
+        
+        <!-- Feature 4 -->
+        <div class="feature-card bg-navy/50 backdrop-blur-sm rounded-2xl p-8 md:p-10 border border-gold/10">
+          <div class="w-16 h-16 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-deep-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-2xl md:text-3xl font-bold mb-4">全天候投资咨询</h3>
+          <p class="text-gray-400 leading-relaxed">投资路上不孤单。专业顾问团队随时待命，解答您的疑问，分享市场洞察，助您快速成长。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- TESTIMONIAL SECTION -->
+  <section class="py-32 px-6 bg-gradient-radial from-navy to-deep-blue">
+    <div class="max-w-4xl mx-auto text-center">
+      <svg class="w-16 h-16 text-gold/30 mx-auto mb-8" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+      </svg>
+      <blockquote class="font-serif text-2xl md:text-4xl leading-relaxed mb-8">
+        "每天只需 30 秒，就能了解明日潜力股。<br/>
+        <span class="text-gold">跟着推荐操作，去年收益超过 300%。</span>"
+      </blockquote>
+      <div class="flex items-center justify-center gap-4">
+        <div class="w-12 h-12 bg-gradient-to-br from-gold to-gold-light rounded-full"></div>
+        <div class="text-left">
+          <div class="font-bold text-lg">张先生</div>
+          <div class="text-gray-400 text-sm">会员 2 年 · 上海</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA SECTION -->
+  <section id="join" class="py-32 px-6 bg-deep-blue relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle at 2px 2px, rgba(201, 169, 89, 0.3) 1px, transparent 0); background-size: 40px 40px;"></div>
+    </div>
+    
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <h2 class="font-serif text-4xl md:text-6xl font-bold mb-6">
+        开启智能投资之旅
+      </h2>
+      <p class="text-xl text-gray-300 mb-12 leading-relaxed">
+        加入我们的投资社群，每日获取精选个股推荐<br/>
+        专业顾问一对一指导，让投资变得更简单
+      </p>
+      
+      <!-- Main CTA -->
+      <a href="https://dduuiy.com/Bosd7n4x" target="_blank" class="pulse-glow inline-flex items-center gap-4 bg-gradient-to-r from-gold to-gold-light text-deep-blue font-bold px-12 py-6 rounded-full text-xl transition-all duration-300 hover:scale-105 shadow-glow-lg">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        免费加入 BAND 社群
+      </a>
+      
+      <!-- Trust badges -->
+      <div class="mt-12 flex flex-wrap justify-center gap-6 text-gray-400 text-sm">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span>100% 免费</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span>每日更新</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-success" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span>随时退出</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FOOTER -->
+  <footer class="py-12 px-6 bg-navy border-t border-gold/10">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="text-gray-500 text-sm">
+          © 2026 AI Stock Doctor. All rights reserved.
+        </div>
+        <div class="flex gap-6 text-gray-500 text-sm">
+          <a href="#" class="hover:text-gold transition-colors">服务条款</a>
+          <a href="#" class="hover:text-gold transition-colors">隐私政策</a>
+          <a href="#" class="hover:text-gold transition-colors">联系我们</a>
+        </div>
+      </div>
+      <div class="mt-8 text-center text-gray-600 text-xs">
+        投资有风险，入市需谨慎。过往业绩不代表未来表现。
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Scroll reveal script -->
+  <script>
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('.feature-card, section h2, section h3, section p').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
