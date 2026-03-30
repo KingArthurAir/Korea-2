@@ -1,6 +1,6 @@
 /**
- * 한국미팅 - 프리미엄 성인 데이트 커뮤니티
- * 1:1复刻 love-me.xyz 交互功能
+ * 한국미팅 - 1:1复刻 love-me.xyz
+ * 交互功能
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -8,16 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     // 선호도 버튼 선택
     // ==========================================
-    const preferenceSections = document.querySelectorAll('.preference-section');
+    const preferenceColumns = document.querySelectorAll('.preference-column');
     
-    preferenceSections.forEach(section => {
-        const buttons = section.querySelectorAll('.pref-btn');
+    preferenceColumns.forEach(column => {
+        const buttons = column.querySelectorAll('.pref-btn');
         
         buttons.forEach(button => {
             button.addEventListener('click', function() {
-                // 같은 섹션의 다른 버튼들에서 active 제거
                 buttons.forEach(btn => btn.classList.remove('active'));
-                // 클릭된 버튼에 active 추가
                 this.classList.add('active');
             });
         });
@@ -26,14 +24,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     // 프로필 카드 클릭
     // ==========================================
-    const previewCards = document.querySelectorAll('.preview-card, .gallery-card');
+    const allCards = document.querySelectorAll('.preview-card-large, .preview-card-small, .gallery-card');
     
-    previewCards.forEach(card => {
+    allCards.forEach(card => {
         card.addEventListener('click', function() {
             const name = this.querySelector('.preview-name, .gallery-name')?.textContent;
             const meta = this.querySelector('.preview-meta, .gallery-location')?.textContent;
-            
-            console.log('프로필 클릭:', name, meta);
             
             // 하트 이펙트
             const heart = document.createElement('div');
@@ -51,39 +47,31 @@ document.addEventListener('DOMContentLoaded', function() {
             
             setTimeout(() => {
                 heart.remove();
-                alert(`${name}${meta}님과의 매칭을 시작합니다!\n\n카카오톡 채널로 이동합니다...`);
+                alert(`${name}${meta ? ' ' + meta : ''}님과의 매칭을 시작합니다!\n\n카카오톡 채널로 이동합니다...`);
             }, 500);
         });
     });
     
-    // 하트 애니메이션 스타일 추가
+    // 하트 애니메이션
     const style = document.createElement('style');
     style.textContent = `
         @keyframes heartFloat {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100px) scale(1.5);
-            }
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-100px) scale(1.5); }
         }
     `;
     document.head.appendChild(style);
     
     // ==========================================
-    // 다운로드 버튼
+    // CTA 버튼
     // ==========================================
-    const downloadButtons = document.querySelectorAll('.btn-download, .btn-meet-now');
+    const ctaButtons = document.querySelectorAll('.btn-download, .btn-meet-now');
     
-    downloadButtons.forEach(btn => {
+    ctaButtons.forEach(btn => {
         btn.addEventListener('click', function() {
             const confirmed = confirm('카카오톡 채널을 추가하시겠습니까?\n\n실제 사람들과의 매칭이 시작됩니다!');
             
             if (confirmed) {
-                // 실제 구현시 카카오톡 채널 링크로 이동
-                // window.location.href = 'https://open.kakao.com/...';
                 alert('카카오톡 채널: @한국미팅\n\n채널을 추가해주세요!');
             }
         });
@@ -96,9 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
-            header.style.background = 'rgba(10, 10, 15, 0.98)';
+            header.style.background = 'rgba(20, 10, 40, 0.95)';
         } else {
-            header.style.background = 'rgba(10, 10, 15, 0.95)';
+            header.style.background = 'rgba(20, 10, 40, 0.8)';
         }
     });
     
@@ -119,9 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    // 애니메이션 적용할 요소
     const animateElements = document.querySelectorAll(
-        '.preference-section, .preview-card, .gallery-card, .feature-item, .cta-section'
+        '.preference-column, .preview-card-large, .preview-card-small, .gallery-card, .feature-card, .cta-section'
     );
     
     animateElements.forEach(el => {
@@ -132,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ==========================================
-    // 갤러리 스와이프 (모바일)
+    // 갤러리 드래그 스크롤 (데스크톱)
     // ==========================================
     const gallery = document.querySelector('.profile-gallery');
     
@@ -143,16 +130,19 @@ document.addEventListener('DOMContentLoaded', function() {
         
         gallery.addEventListener('mousedown', (e) => {
             isDown = true;
+            gallery.style.cursor = 'grabbing';
             startX = e.pageX - gallery.offsetLeft;
             scrollLeft = gallery.scrollLeft;
         });
         
         gallery.addEventListener('mouseleave', () => {
             isDown = false;
+            gallery.style.cursor = 'grab';
         });
         
         gallery.addEventListener('mouseup', () => {
             isDown = false;
+            gallery.style.cursor = 'grab';
         });
         
         gallery.addEventListener('mousemove', (e) => {
@@ -165,8 +155,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // ==========================================
-    // 콘솔 메시지
+    // 콘솔 로그
     // ==========================================
     console.log('%c💕 한국미팅', 'font-size: 24px; font-weight: bold; color: #ff4757;');
-    console.log('%c프리미엄 데이트 커뮤니티가 로드되었습니다.', 'font-size: 14px; color: #888899;');
+    console.log('%c1:1复刻 love-me.xyz - 한국 버전이 로드되었습니다.', 'font-size: 14px; color: #b8a8c8;');
 });
