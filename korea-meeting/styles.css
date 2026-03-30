@@ -1,0 +1,373 @@
+/* 한국 미팅 - 고급 데이트 커뮤니티 스타일 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #fff;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* 헤더 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.cta-btn {
+    background: linear-gradient(135deg, #ff4757, #ff6b81);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(255, 71, 87, 0.4);
+}
+
+/* 히어로 섹션 */
+.hero {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #ff4757, #ffa502);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-content > p {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 1.5rem;
+}
+
+.features {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.features li {
+    font-size: 1rem;
+    color: #fff;
+}
+
+/* 선호도 섹션 */
+.preferences {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+}
+
+.preference-group {
+    margin-bottom: 1.5rem;
+}
+
+.preference-group:last-child {
+    margin-bottom: 0;
+}
+
+.preference-title {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    color: #ddd;
+}
+
+.buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.buttons button {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.buttons button:hover,
+.buttons button.active {
+    background: linear-gradient(135deg, #ff4757, #ff6b81);
+    border-color: transparent;
+}
+
+.download-btn {
+    background: linear-gradient(135deg, #2ed573, #7bed9f);
+    color: #1a1a2e;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 1.5rem 0;
+}
+
+.download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(46, 213, 115, 0.4);
+}
+
+.download-btn.large {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.2rem;
+}
+
+.subtext {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+/* 프로필 섹션 */
+.profiles {
+    padding: 4rem 2rem;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.section-title p {
+    color: #999;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.profile-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.profile-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(255, 71, 87, 0.3);
+}
+
+.profile-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+
+.profile-info {
+    padding: 1rem;
+    text-align: center;
+}
+
+.profile-info .name {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.profile-info .age-location {
+    display: block;
+    font-size: 0.9rem;
+    color: #999;
+    margin-top: 0.25rem;
+}
+
+/* 특징 섹션 */
+.features-section {
+    padding: 4rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.feature {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.feature h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    color: #fff;
+}
+
+.feature p {
+    color: #999;
+    font-size: 0.95rem;
+}
+
+/* CTA 섹션 */
+.cta-section {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(255, 71, 87, 0.1), rgba(255, 107, 129, 0.1));
+}
+
+.cta-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.cta-section p {
+    color: #ccc;
+    margin-bottom: 1.5rem;
+}
+
+.cta-section .disclaimer {
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+}
+
+/* 푸터 */
+footer {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 3rem 2rem 2rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto 2rem;
+}
+
+.footer-brand img {
+    height: 30px;
+    margin-bottom: 0.5rem;
+}
+
+.footer-brand p {
+    color: #666;
+    font-size: 0.9rem;
+    max-width: 300px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-links a {
+    color: #999;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #ff4757;
+}
+
+.legal-warning {
+    text-align: center;
+    color: #444;
+    font-size: 0.8rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .features {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .preferences {
+        padding: 1.5rem;
+    }
+    
+    .profile-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+    
+    .profile-card img {
+        height: 200px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        justify-content: center;
+    }
+}
