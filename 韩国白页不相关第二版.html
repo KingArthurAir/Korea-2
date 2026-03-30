@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>코리안 랭귀지 아카데미 - 한국어 온라인 교육</title>
+    <meta name="description" content="외국인을 위한 전문 한국어 온라인 교육 프로그램. K-POP, K-드라마를 통해 재미있게 한국어를 배워보세요.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        /* Header */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .logo:hover {
+            opacity: 0.8;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav li span {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        nav li span:hover {
+            color: #2563eb;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+        
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            z-index: 999;
+        }
+        
+        .mobile-nav.active {
+            display: block;
+        }
+        
+        .mobile-nav span {
+            display: block;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #333;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .mobile-nav span:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-nav span:hover {
+            color: #2563eb;
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #fff;
+            color: #2563eb;
+            padding: 16px 45px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #1e40af;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: #f8fafc;
+            padding: 35px 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .feature-card p {
+            color: #64748b;
+            line-height: 1.7;
+        }
+        
+        /* Courses Section */
+        .courses {
+            padding: 80px 20px;
+            background: #f0f9ff;
+        }
+        
+        .courses-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        
+        .course-header {
+            height: 150px;
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        
+        .course-body {
+            padding: 30px;
+        }
+        
+        .course-level {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .course-card h3 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .course-card p {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .course-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .course-features li {
+            color: #475569;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .course-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .course-features li::before {
+            content: "✓ ";
+            color: #2563eb;
+            font-weight: bold;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-content h2 {
+            color: #1e40af;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+        }
+        
+        .about-content p {
+            color: #475569;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            color: white;
+        }
+        
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 20px;
+            background: #f8fafc;
+        }
+        
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-stars {
+            color: #fbbf24;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-text {
+            color: #475569;
+            font-style: italic;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .author-info h4 {
+            color: #1e293b;
+            margin-bottom: 3px;
+        }
+        
+        .author-info p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            border-color: #2563eb;
+        }
+        
+        .faq-question {
+            padding: 22px 25px;
+            background: #f8fafc;
+            font-weight: 600;
+            color: #1e40af;
+            position: relative;
+            font-size: 1.05rem;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 25px;
+            font-size: 24px;
+            color: #2563eb;
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            color: #475569;
+            line-height: 1.7;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 22px 25px;
+            max-height: 500px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #1e40af 0%, #5b21b6 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 35px;
+            opacity: 0.95;
+        }
+        
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 60px 20px 30px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h4 {
+            color: #60a5fa;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .footer-section p {
+            color: #94a3b8;
+            line-height: 2;
+        }
+        
+        .footer-link {
+            color: #94a3b8;
+            cursor: pointer;
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 30px;
+            border-top: 1px solid #1e293b;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            overflow-y: auto;
+        }
+        
+        .modal-overlay.active {
+            display: block;
+        }
+        
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            margin: 40px auto;
+            border-radius: 12px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            padding: 30px 40px 20px;
+            border-bottom: 2px solid #2563eb;
+            position: sticky;
+            top: 0;
+            background: white;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .modal-header h2 {
+            color: #1e40af;
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f1f5f9;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            color: #64748b;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+        
+        .modal-body {
+            padding: 40px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .modal-body h3 {
+            color: #1e40af;
+            margin: 25px 0 15px;
+            font-size: 1.3rem;
+        }
+        
+        .modal-body p {
+            color: #475569;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .modal-body ul,
+        .modal-body ol {
+            margin: 15px 0 15px 30px;
+            color: #475569;
+        }
+        
+        .modal-body li {
+            margin-bottom: 8px;
+        }
+        
+        .modal-body .highlight {
+            background: #dbeafe;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .modal-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .modal-body th,
+        .modal-body td {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .modal-body th {
+            background: #f1f5f9;
+            color: #1e40af;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 10px 15px;
+                position: relative;
+            }
+            
+            .logo {
+                font-size: 16px;
+                white-space: nowrap;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .hero {
+                margin-top: 60px;
+                padding: 60px 15px;
+            }
+            
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero p {
+                font-size: 0.95rem;
+            }
+            
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+                margin-bottom: 30px;
+            }
+            
+            .features {
+                padding: 50px 15px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+            
+            .courses {
+                padding: 50px 15px;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about {
+                padding: 50px 15px;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .about-content h2 {
+                text-align: center;
+            }
+            
+            .stats {
+                padding: 50px 15px;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+            
+            .stat-item {
+                padding: 20px 15px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .testimonials {
+                padding: 50px 15px;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .faq {
+                padding: 50px 15px;
+            }
+            
+            .cta-section {
+                padding: 50px 15px;
+            }
+            
+            .modal-content {
+                margin: 15px;
+                max-width: calc(100% - 30px);
+            }
+            
+            .modal-header {
+                padding: 15px 20px;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.3rem;
+            }
+            
+            .modal-body {
+                padding: 20px;
+                max-height: 60vh;
+            }
+            
+            .modal-close {
+                width: 35px;
+                height: 35px;
+                font-size: 20px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <span class="logo" onclick="scrollToSection('hero')" style="cursor: pointer;">코리안랭귀지</span>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="메뉴">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <ul>
+                    <li><span onclick="scrollToSection('features')">특징</span></li>
+                    <li><span onclick="scrollToSection('courses')">강의</span></li>
+                    <li><span onclick="scrollToSection('about')">소개</span></li>
+                    <li><span onclick="scrollToSection('testimonials')">후기</span></li>
+                    <li><span onclick="scrollToSection('faq')">FAQ</span></li>
+                    <li><span onclick="scrollToSection('contact')">문의</span></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <span onclick="scrollToSection('features'); toggleMobileMenu()">특징</span>
+            <span onclick="scrollToSection('courses'); toggleMobileMenu()">강의</span>
+            <span onclick="scrollToSection('about'); toggleMobileMenu()">소개</span>
+            <span onclick="scrollToSection('testimonials'); toggleMobileMenu()">후기</span>
+            <span onclick="scrollToSection('faq'); toggleMobileMenu()">FAQ</span>
+            <span onclick="scrollToSection('contact'); toggleMobileMenu()">문의</span>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <h1>재미있게 배우는 한국어<br>온라인 교육 플랫폼</h1>
+        <p>K-POP 과 K-드라마를 통해 생생한 한국어를 배워보세요.<br>전 세계 50 만 명이 선택한 한국어 교육 프로그램.</p>
+        <button class="cta-button" onclick="scrollToSection('courses')">무료 체험 시작하기</button>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2 class="section-title">왜 코리안랭귀지인가?</h2>
+        <p class="section-subtitle">다른 언어 교육과 차별화된 특별한 학습 경험</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎬</div>
+                <h3>K-콘텐츠 학습</h3>
+                <p>최신 K-POP 뮤직비디오와 K-드라마 장면을 활용한 생생한 한국어 학습. 실제 사용되는 표현을 배울 수 있습니다.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>맞춤형 커리큘럼</h3>
+                <p>초급부터 고급까지 수준별 맞춤 교육 과정. 학습자의 목표와 속도에 맞춰 진행됩니다.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👩‍🏫</div>
+                <h3>전문 강사진</h3>
+                <p>외국어로서의 한국어 교육 자격증을 보유한 전문 강사들이 체계적으로指導합니다.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>실시간 회화</h3>
+                <p>1:1 및 그룹 화상 수업을 통해 실제 대화 능력을 키울 수 있습니다.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>모바일 학습</h3>
+                <p>스마트폰, 태블릿, PC 어디서든 학습 가능. 바쁜 일상 속에서도 꾸준히 학습할 수 있습니다.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>수료증 발급</h3>
+                <p>과정 수료 후 공식 수료증 발급. TOPIK 시험 대비도 함께 준비할 수 있습니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses">
+        <div class="courses-container">
+            <h2 class="section-title">강의 과정</h2>
+            <p class="section-subtitle">수준에 맞는 과정을 선택하세요</p>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-header">🌱</div>
+                    <div class="course-body">
+                        <span class="course-level">초급</span>
+                        <h3>한국어 기초 마스터</h3>
+                        <p>한글 자모음부터 기본 회화까지. 한국어 학습의 첫걸음을 떼세요.</p>
+                        <ul class="course-features">
+                            <li>한글 읽기/쓰기</li>
+                            <li>기본 인사말 및 자기소개</li>
+                            <li>일상 생활 기본 표현</li>
+                            <li>총 40 회 차 수업</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-header">🌿</div>
+                    <div class="course-body">
+                        <span class="course-level">중급</span>
+                        <h3>실전 회화 집중</h3>
+                        <p>실제 상황에서 활용할 수 있는 실전 회화 능력을 기릅니다.</p>
+                        <ul class="course-features">
+                            <li>자연스러운 대화 표현</li>
+                            <li>K-드라마 대사 분석</li>
+                            <li>상황별 역할극</li>
+                            <li>총 60 회 차 수업</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-header">🌳</div>
+                    <div class="course-body">
+                        <span class="course-level">고급</span>
+                        <h3>비즈니스 한국어</h3>
+                        <p>한국 기업 취업을 위한 비즈니스 한국어 및 면접 대비.</p>
+                        <ul class="course-features">
+                            <li>비즈니스 회화</li>
+                            <li>이메일 작성법</li>
+                            <li>면접 대비</li>
+                            <li>총 80 회 차 수업</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-container">
+            <div class="about-content">
+                <h2>코리안랭귀지 소개</h2>
+                <p>코리안랭귀지는 2015 년 설립된 온라인 한국어 교육 전문 기관입니다. 전 세계 한국어 학습자들에게 질 높은 교육 콘텐츠를 제공하기 위해 노력해 왔습니다.</p>
+                <p>저희의 미션은 K-POP 과 K-드라마를 통해 한국 문화에 관심을 가진 전 세계인들이 한국어라는 장벽 없이 한국 문화와 소통할 수 있도록 돕는 것입니다.</p>
+                <p>단순한 언어 교육을 넘어, 한국 문화 이해와 실제 활용 능력을 함께 기를 수 있는 통합적인 학습 프로그램을 제공합니다.</p>
+            </div>
+            <div class="about-image">
+                코리안랭귀지 아카데미
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3>500K+</h3>
+                <p>전 세계 학습자</p>
+            </div>
+            <div class="stat-item">
+                <h3>120+</h3>
+                <p>국가 및 지역</p>
+            </div>
+            <div class="stat-item">
+                <h3>95%</h3>
+                <p>회원 만족도</p>
+            </div>
+            <div class="stat-item">
+                <h3>50+</h3>
+                <p>전문 강사진</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <div class="testimonials-container">
+            <h2 class="section-title">학습자 후기</h2>
+            <p class="section-subtitle" style="margin-bottom: 40px;">전 세계 학습자들의 생생한 후기</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"K-POP 을 통해 한국어를 배우고 싶었는데, 정말 재미있게 학습할 수 있었어요. 가사 분석 수업이 특히 좋았습니다!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div class="author-info">
+                            <h4>Sarah M.</h4>
+                            <p>미국, 로스앤젤레스</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"드라마 대사를 분석하며 배우니 실제 한국인들이 쓰는 표현을 자연스럽게 익힐 수 있었어요. 회화 실력이 많이 늘었습니다."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">T</div>
+                        <div class="author-info">
+                            <h4>Tanaka Y.</h4>
+                            <p>일본, 도쿄</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"비즈니스 과정 덕분에 한국 회사에 취업할 수 있었습니다. 면접 대비 수업이 정말 도움이 되었어요!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <h4>Michael C.</h4>
+                            <p>독일, 베를린</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <h2 class="section-title">자주 묻는 질문</h2>
+        <p class="section-subtitle" style="margin-bottom: 30px;">궁금한 점을 확인해보세요</p>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">Q.完全没有韩语基础也可以学习吗？</div>
+            <div class="faq-answer">네,完全可以。초급 과정은 한글 자모음부터 차근차근 가르쳐주기 때문에完全没有基础인 학습자도 쉽게 시작할 수 있습니다.</div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">Q. 수업은 어떻게 진행되나요?</div>
+            <div class="faq-answer">온라인 화상 수업과 사전 녹화 강의를 병행합니다. 실시간 수업은 Zoom 을 통해 진행되며, 녹화 강의는 전용 학습 플랫폼에서 언제든지 수강할 수 있습니다.</div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">Q. 수강료는 얼마인가요?</div>
+            <div class="faq-answer">과정별로 상이하며, 초급 과정은 월 99,000 원부터 시작합니다. 자세한 요금은 문의처를 통해 확인하실 수 있습니다. 첫 달은 무료로 체험하실 수 있습니다.</div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">Q. 수료 후 TOPIK 시험을 볼 수 있나요?</div>
+            <div class="faq-answer">네, 고급 과정 수료 시 TOPIK II 응시 수준의 실력을 갖출 수 있습니다. TOPIK 대비 특강도 별도로 운영하고 있습니다.</div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-question">Q. 환불은 어떻게 하나요?</div>
+            <div class="faq-answer">수업 시작 전에는 전액 환불 가능하며, 수업 진행 상황에 따라 пропорциональ히 환불됩니다. 자세한 내용은 환불 정책을 확인해주세요.</div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>지금 바로 시작하세요</h2>
+        <p>첫 달 무료 체험으로 코리안랭귀지의 학습 방식을 경험해보세요.</p>
+        <button class="cta-button" onclick="scrollToSection('contact')">무료 체험 신청하기</button>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>코리안랭귀지</h4>
+                <p>전 세계인을 위한<br>한국어 온라인 교육</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>연락처</h4>
+                <p>📍 서울특별시 강남구</p>
+                <p>📧 info@koreanlanguage.ac.kr</p>
+                <p>🕐 평일 09:00 - 18:00</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>바로가기</h4>
+                <p class="footer-link" onclick="scrollToSection('features')">특징</p>
+                <p class="footer-link" onclick="scrollToSection('courses')">강의</p>
+                <p class="footer-link" onclick="scrollToSection('about')">소개</p>
+                <p class="footer-link" onclick="scrollToSection('faq')">FAQ</p>
+                <p class="footer-link" onclick="scrollToSection('contact')">문의</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>법률 정보</h4>
+                <p class="footer-link" onclick="openModal('privacy')">개인정보처리방침</p>
+                <p class="footer-link" onclick="openModal('terms')">서비스 이용약관</p>
+                <p class="footer-link" onclick="openModal('refund')">환불 정책</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2026 코리안랭귀지 아카데미. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModalBtn()">×</button>
+            <div class="modal-header">
+                <h2 id="modalTitle">제목</h2>
+            </div>
+            <div class="modal-body" id="modalBody">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal content data
+        const modalData = {
+            privacy: {
+                title: '개인정보처리방침',
+                content: `
+                    <p><strong>최신 개정일:</strong> 2026 년 3 월 27 일</p>
+                    
+                    <p>코리안랭귀지 아카데미 (이하 "아카데미") 는 이용자의 개인정보 보호를 위해「개인정보 보호법」및 관련 법령을 준수하며, 적법하게 개인정보를 처리하고 안전하게 관리하고 있습니다.</p>
+                    
+                    <h3>1. 수집하는 개인정보 항목</h3>
+                    <ul>
+                        <li>필수 항목: 이름, 이메일 주소, 국가</li>
+                        <li>선택 항목: 학습 목표, 현재 한국어 수준</li>
+                        <li>자동 수집 항목: IP 주소, 쿠키, 방문 기록, 서비스 이용 기록</li>
+                    </ul>
+                    
+                    <h3>2. 수집 및 이용 목적</h3>
+                    <ul>
+                        <li>서비스 제공: 강의 수강, 학습 관리, 진도 추적</li>
+                        <li>회원 관리: 본인 확인, 문의 처리, 공지사항 전달</li>
+                        <li>마케팅: 신규 강의 안내, 이벤트 정보 제공 (선택 동의)</li>
+                        <li>통계 분석: 서비스 이용 패턴 분석 및 개선</li>
+                    </ul>
+                    
+                    <h3>3. 보유 및 이용 기간</h3>
+                    <p>이용 목적 달성 후 지체 없이 파기합니다:</p>
+                    <ul>
+                        <li>회원 정보: 탈퇴 시 즉시 파기</li>
+                        <li>계약 관련 기록: 5 년</li>
+                        <li>결제 관련 기록: 5 년</li>
+                        <li>고객 문의 기록: 3 년</li>
+                    </ul>
+                    
+                    <h3>4. 개인정보 보호책임자</h3>
+                    <ul>
+                        <li><strong>책임자:</strong> 김지훈</li>
+                        <li><strong>연락처:</strong> privacy@koreanlanguage.ac.kr</li>
+                    </ul>
+                `
+            },
+            terms: {
+                title: '서비스 이용약관',
+                content: `
+                    <p><strong>최신 개정일:</strong> 2026 년 3 월 27 일</p>
+                    <p><strong>시행일:</strong> 2026 년 3 월 27 일</p>
+                    
+                    <div class="highlight">
+                        <p>본 이용약관은 코리안랭귀지 아카데미가 제공하는 온라인 교육 서비스를 이용함에 있어 아카데미와 이용자 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+                    </div>
+                    
+                    <h3>제 1 조 (목적)</h3>
+                    <p>본 약관은 온라인 한국어 교육 서비스의 이용에 관한 조건과 절차를 규정함을 목적으로 합니다.</p>
+                    
+                    <h3>제 2 조 (서비스 내용)</h3>
+                    <ul>
+                        <li>온라인 한국어 강의 제공</li>
+                        <li>학습 관리 및 진도 추적</li>
+                        <li>화상 수업 서비스</li>
+                        <li>학습 자료 다운로드</li>
+                        <li>수료증 발급</li>
+                    </ul>
+                    
+                    <h3>제 3 조 (이용자의 의무)</h3>
+                    <p>이용자는 다음 행위를 하여서는 안 됩니다:</p>
+                    <ul>
+                        <li>허위정보 등록 또는 타인의 정보 도용</li>
+                        <li>강의 콘텐츠의 무단 복제 및 배포</li>
+                        <li>다른 이용자의 학습을 방해하는 행위</li>
+                        <li>부정한 방법의 서비스 이용</li>
+                    </ul>
+                    
+                    <h3>제 4 조 (지적재산권)</h3>
+                    <p>아카데미가 제공하는 모든 강의 콘텐츠의 지적재산권은 아카데미에 귀속됩니다. 이용자의 개인 학습 목적 외의 사용은 금지됩니다.</p>
+                    
+                    <h3>제 5 조 (관할법원)</h3>
+                    <p>아카데미와 이용자 간에 발생한 분쟁에 관한 소송은 서울중앙지방법원을 관할법원으로 합니다.</p>
+                `
+            },
+            refund: {
+                title: '환불 정책',
+                content: `
+                    <p><strong>최신 개정일:</strong> 2026 년 3 월 27 일</p>
+                    
+                    <div class="highlight">
+                        <p>코리안랭귀지 아카데미는 이용자의 권익 보호를 위해 투명하고 공정한 환불 정책을 운영하고 있습니다.</p>
+                    </div>
+                    
+                    <h3>1. 환불 적용 대상</h3>
+                    <ul>
+                        <li>강의 수강 전 취소 시</li>
+                        <li>서비스 장애로 인한 정상적인 이용이 불가능한 경우</li>
+                        <li>아카데미의 귀책사유로 서비스 제공이 어려운 경우</li>
+                    </ul>
+                    
+                    <h3>2. 환불 기준</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>취소 시점</th>
+                                <th>환불 금액</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>수강 시작 전</td>
+                                <td>전액 환불</td>
+                            </tr>
+                            <tr>
+                                <td>전체 강의의 1/3 수강 전</td>
+                                <td>2/3 환불</td>
+                            </tr>
+                            <tr>
+                                <td>전체 강의의 1/2 수강 전</td>
+                                <td>1/2 환불</td>
+                            </tr>
+                            <tr>
+                                <td>전체 강의의 1/2 수강 후</td>
+                                <td>환불 불가</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>3. 환불 신청 절차</h3>
+                    <ol>
+                        <li>이메일로 환불 신청 (refund@koreanlanguage.ac.kr)</li>
+                        <li>환불 신청서 작성 및 제출</li>
+                        <li>아카데미 확인 (영업일 기준 3 일 이내)</li>
+                        <li>승인 후 3~5 일 이내 환불</li>
+                    </ol>
+                    
+                    <h3>4. 무료 체험 기간</h3>
+                    <p>첫 달 무료 체험 기간 중에는 언제든지 해지할 수 있으며, 추가 요금이 청구되지 않습니다.</p>
+                    
+                    <h3>5. 문의처</h3>
+                    <div class="highlight">
+                        <p>📧 이메일: refund@koreanlanguage.ac.kr</p>
+                    </div>
+                `
+            }
+        };
+
+        // Modal functions
+        function openModal(type) {
+            const modal = document.getElementById('modalOverlay');
+            const title = document.getElementById('modalTitle');
+            const body = document.getElementById('modalBody');
+            
+            title.textContent = modalData[type].title;
+            body.innerHTML = modalData[type].content;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModalBtn();
+            }
+        }
+
+        function closeModalBtn() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // FAQ toggle
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const btn = document.querySelector('.mobile-menu-btn');
+            const nav = document.getElementById('mobileNav');
+            btn.classList.toggle('active');
+            nav.classList.toggle('active');
+        }
+
+        // Scroll to section
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModalBtn();
+            }
+        });
+    </script>
+</body>
+</html>

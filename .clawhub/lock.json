@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "duckduckgo-search": {
+      "version": "1.0.0",
+      "installedAt": 1774493475210
+    },
+    "frontend-design-3": {
+      "version": "0.1.0",
+      "installedAt": 1774493476974
+    },
+    "ui-ux-pro-max": {
+      "version": "0.1.0",
+      "installedAt": 1774493482390
+    }
+  }
+}
