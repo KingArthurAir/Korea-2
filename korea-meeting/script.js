@@ -1,109 +1,212 @@
-// 한국 미팅 - 인터랙티브 스크립트
+/**
+ * 서울나이트 - 프리미엄 데이트 커뮤니티
+ * Interactive JavaScript
+ */
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 선호도 버튼 선택 기능
-    const preferenceGroups = document.querySelectorAll('.preference-group');
+    // ==========================================
+    // Custom Cursor
+    // ==========================================
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
     
-    preferenceGroups.forEach(group => {
-        const buttons = group.querySelectorAll('.buttons button');
+    if (cursorDot && cursorOutline) {
+        window.addEventListener('mousemove', function(e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            // Dot follows instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            // Outline follows with slight delay
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: 'forwards' });
+        });
+        
+        // Hover effect on interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .profile-card');
+        
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorOutline.style.width = '60px';
+                cursorOutline.style.height = '60px';
+                cursorOutline.style.backgroundColor = 'rgba(255, 71, 87, 0.1)';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursorOutline.style.width = '40px';
+                cursorOutline.style.height = '40px';
+                cursorOutline.style.backgroundColor = 'transparent';
+            });
+        });
+    }
+    
+    // ==========================================
+    // Header Scroll Effect
+    // ==========================================
+    const header = document.querySelector('.header');
+    
+    if (header) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
+    
+    // ==========================================
+    // Preference Buttons Selection
+    // ==========================================
+    const preferenceCards = document.querySelectorAll('.preference-card');
+    
+    preferenceCards.forEach(card => {
+        const buttons = card.querySelectorAll('.option-btn');
         
         buttons.forEach(button => {
             button.addEventListener('click', function() {
-                // 같은 그룹의 다른 버튼들에서 active 클래스 제거
+                // Remove active from siblings
                 buttons.forEach(btn => btn.classList.remove('active'));
-                // 클릭된 버튼에 active 클래스 추가
+                // Add active to clicked
                 this.classList.add('active');
             });
         });
     });
     
-    // 프로필 카드 클릭 이벤트
-    const profileCards = document.querySelectorAll('.profile-card');
+    // ==========================================
+    // Match Button
+    // ==========================================
+    const matchBtn = document.querySelector('.btn-match');
+    
+    if (matchBtn) {
+        matchBtn.addEventListener('click', function() {
+            // Collect selected preferences
+            const preferences = {};
+            
+            preferenceCards.forEach(card => {
+                const category = card.dataset.category;
+                const selected = card.querySelector('.option-btn.active');
+                if (selected) {
+                    preferences[category] = selected.dataset.value;
+                }
+            });
+            
+            console.log('Selected preferences:', preferences);
+            
+            // Show matching animation
+            this.innerHTML = `
+                <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+                    <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round">
+                        <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/>
+                    </path>
+                </svg>
+                <span>매칭 중...</span>
+            `;
+            
+            // Simulate matching process
+            setTimeout(() => {
+                alert('✨ 매칭이 완료되었습니다!\n\n카카오톡 채널로 이동합니다...');
+                // Redirect to KakaoTalk channel
+                // window.location.href = 'https://open.kakao.com/...';
+            }, 2000);
+        });
+    }
+    
+    // ==========================================
+    // Profile Card Interactions
+    // ==========================================
+    const profileCards = document.querySelectorAll('.profile-card, .profile-card-featured');
     
     profileCards.forEach(card => {
         card.addEventListener('click', function() {
-            const name = this.querySelector('.name').textContent;
-            const ageLocation = this.querySelector('.age-location').textContent;
+            const name = this.querySelector('.profile-name')?.textContent;
             
-            // 카카오톡 연결 (실제로는 백엔드 연동 필요)
-            alert(`${name} (${ageLocation})님과의 매칭을 시작합니다!\n\n카카오톡으로 연결됩니다...`);
-            
-            // 실제 구현시에는 백엔드 API 호출 또는 카카오톡 링크로 이동
-            // window.location.href = 'https://open.kakao.com/...';
+            if (name) {
+                // Heart animation
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.cssText = `
+                    position: fixed;
+                    font-size: 3rem;
+                    pointer-events: none;
+                    z-index: 9999;
+                    animation: heartFloat 1s ease-out forwards;
+                `;
+                heart.style.left = this.getBoundingClientRect().left + this.offsetWidth / 2 + 'px';
+                heart.style.top = this.getBoundingClientRect().top + 'px';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 1000);
+                
+                console.log(`Profile clicked: ${name}`);
+            }
         });
+        
+        // Like button
+        const likeBtn = card.querySelector('.btn-profile-action');
+        if (likeBtn) {
+            likeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('liked');
+                
+                if (this.classList.contains('liked')) {
+                    this.innerHTML = `
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    `;
+                } else {
+                    this.innerHTML = `
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    `;
+                }
+            });
+        }
     });
     
-    // CTA 버튼 클릭 이벤트
-    const ctaButtons = document.querySelectorAll('.cta-btn, .download-btn');
+    // Add heart float animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes heartFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.5);
+            }
+        }
+    `;
+    document.head.appendChild(style);
     
-    ctaButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // 카카오톡 채널 추가 또는 앱 다운로드 페이지로 이동
-            const confirmDownload = confirm('카카오톡 채널을 추가하시겠습니까?\n\n실제 사람들과의 매칭이 시작됩니다!');
+    // ==========================================
+    // CTA Buttons
+    // ==========================================
+    const ctaButtons = document.querySelectorAll('.header-cta, .btn-glow');
+    
+    ctaButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const phoneNumber = prompt('휴대폰 번호를 입력해주세요:\n\n예: 010-1234-5678');
             
-            if (confirmDownload) {
-                // 실제 구현시에는 카카오톡 링크로 이동
-                // window.location.href = 'https://open.kakao.com/...';
-                alert('카카오톡 채널: @한국미팅\n\n채널을 추가해주세요!');
+            if (phoneNumber) {
+                console.log('Phone number entered:', phoneNumber);
+                alert('인증번호가 전송되었습니다.');
             }
         });
     });
     
-    // 스크롤 시 헤더 효과
-    let lastScroll = 0;
-    
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 100) {
-            header.style.background = 'rgba(0, 0, 0, 0.8)';
-        } else {
-            header.style.background = 'rgba(0, 0, 0, 0.3)';
-        }
-        
-        lastScroll = currentScroll;
-    });
-    
-    // 프로필 카드 스와이프 효과 (모바일)
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    profileCards.forEach(card => {
-        card.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        card.addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe(card);
-        });
-    });
-    
-    function handleSwipe(card) {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
-        
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0) {
-                // 왼쪽 스와이프
-                card.style.transform = 'translateX(-100px) rotate(-10deg)';
-                card.style.opacity = '0.5';
-            } else {
-                // 오른쪽 스와이프
-                card.style.transform = 'translateX(100px) rotate(10deg)';
-                card.style.opacity = '0.5';
-            }
-            
-            setTimeout(() => {
-                card.style.transform = '';
-                card.style.opacity = '';
-            }, 300);
-        }
-    }
-    
-    // 페이드인 애니메이션 (스크롤 시)
+    // ==========================================
+    // Scroll Animations (Intersection Observer)
+    // ==========================================
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -114,12 +217,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
     
-    // 애니메이션 적용할 요소들
-    const animateElements = document.querySelectorAll('.profile-card, .feature, .cta-section');
+    // Observe elements
+    const animateElements = document.querySelectorAll(
+        '.preference-card, .profile-card, .feature-card, .cta-content'
+    );
     
     animateElements.forEach(el => {
         el.style.opacity = '0';
@@ -128,5 +234,99 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
     
-    console.log('🇰🇷 한국 미팅 웹사이트가 로드되었습니다!');
+    // ==========================================
+    // Smooth Scroll for Anchor Links
+    // ==========================================
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            if (href !== '#' && href.length > 1) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+    
+    // ==========================================
+    // Phone Input Formatting
+    // ==========================================
+    const phoneInput = document.querySelector('.cta-input');
+    
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^0-9]/g, '');
+            
+            if (value.length > 3) {
+                value = value.replace(/^(\d{3})(\d{4})(\d{4}).*/, '$1-$2-$3');
+            } else if (value.length > 0) {
+                value = value.replace(/^(\d{3}).*/, '$1-');
+            }
+            
+            e.target.value = value;
+        });
+    }
+    
+    // ==========================================
+    // Stats Counter Animation
+    // ==========================================
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    const statObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const text = target.textContent;
+                const hasPlus = text.includes('+');
+                const hasPercent = text.includes('%');
+                const hasSlash = text.includes('/');
+                
+                if (!hasSlash) {
+                    const num = parseInt(text.replace(/[^0-9]/g, ''));
+                    
+                    if (num) {
+                        let current = 0;
+                        const increment = num / 50;
+                        const duration = 2000;
+                        const stepTime = duration / 50;
+                        
+                        const counter = setInterval(() => {
+                            current += increment;
+                            
+                            if (current >= num) {
+                                current = num;
+                                clearInterval(counter);
+                            }
+                            
+                            let display = Math.floor(current).toLocaleString();
+                            if (hasPlus) display += '+';
+                            if (hasPercent) display += '%';
+                            
+                            target.textContent = display;
+                        }, stepTime);
+                    }
+                }
+                
+                statObserver.unobserve(target);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    statNumbers.forEach(stat => statObserver.observe(stat));
+    
+    // ==========================================
+    // Console Ready Message
+    // ==========================================
+    console.log('%c🌙 서울나이트', 'font-size: 24px; font-weight: bold; color: #ff4757;');
+    console.log('%c프리미엄 데이트 커뮤니티가 로드되었습니다.', 'font-size: 14px; color: #a0a0b0;');
+    console.log('%c개발자 도구에서 콘솔을 사용할 수 있습니다.', 'font-size: 12px; color: #6b6b80;');
 });

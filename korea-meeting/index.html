@@ -3,160 +3,424 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>한국 미팅 - 고급 데이트 커뮤니티</title>
+    <title>서울나이트 | Seoul Night - 프리미엄 데이트 커뮤니티</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <a href="#">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40'%3E%3Ctext y='30' font-size='24' fill='%23ff4757'%3E💕%3C/text%3E%3C/svg%3E" alt="로고">
+    <!-- 커스텀 커서 -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    
+    <!-- 노이즈 오버레이 -->
+    <div class="noise-overlay"></div>
+    
+    <!-- 그라디언트 백그라운드 -->
+    <div class="gradient-bg">
+        <div class="gradient-orb gradient-orb-1"></div>
+        <div class="gradient-orb gradient-orb-2"></div>
+        <div class="gradient-orb gradient-orb-3"></div>
+    </div>
+
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <span class="logo-icon">🌙</span>
+                <span class="logo-text">서울나이트</span>
             </a>
+            <nav class="nav">
+                <a href="#profiles">프로필</a>
+                <a href="#features">특징</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+            <button class="btn btn-primary header-cta">지금 시작하기</button>
         </div>
-        <button class="cta-btn">지금 만나기</button>
     </header>
 
     <main>
         <!-- 히어로 섹션 -->
         <section class="hero">
-            <div class="hero-content">
-                <h1>강렬한 설렘 · 오늘 밤의 만남</h1>
-                <p>오늘 밤 만나요｜실제 사람들｜점점 더 설레는 경험, 지금 바로 시작</p>
-                <ul class="features">
-                    <li>🔞 성인 전용 데이트</li>
-                    <li>✅ 실제 만남 보장</li>
-                    <li>🔒 익명 & 비밀 보장</li>
-                </ul>
+            <div class="container">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>실시간 2,847 명 온라인</span>
+                </div>
                 
-                <div class="preferences">
-                    <div class="preference-group">
-                        <span class="preference-title">🎂 연령대 선호</span>
-                        <div class="buttons">
-                            <button class="active">전체</button>
-                            <button>18-25 세</button>
-                            <button>26-35 세</button>
-                            <button>35 세 이상</button>
-                        </div>
+                <h1 class="hero-title">
+                    <span class="title-line">오늘 밤, </span>
+                    <span class="title-line highlight">설레는 만남</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    서울의 고급 데이트 커뮤니티<br>
+                    검증된 실제 사람들만 모인 프라이빗 공간
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">15,000+</span>
+                        <span class="stat-label">회원</span>
                     </div>
-                    <div class="preference-group">
-                        <span class="preference-title">✨ 이상형 타입</span>
-                        <div class="buttons">
-                            <button class="active">전체</button>
-                            <button>청순&섹시</button>
-                            <button>글래머러스</button>
-                            <button>순수여신</button>
-                            <button>성숙한 여성</button>
-                        </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-number">89%</span>
+                        <span class="stat-label">매칭 성공률</span>
                     </div>
-                    <div class="preference-group">
-                        <span class="preference-title">💪 체형</span>
-                        <div class="buttons">
-                            <button class="active">전체</button>
-                            <button>마른형</button>
-                            <button>글래머</button>
-                            <button>운동형</button>
-                        </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">고객지원</span>
                     </div>
                 </div>
                 
-                <button class="download-btn">📱 데이트 앱 지금 다운로드</button>
-                <p class="subtext">선호도를 선택하면 이상적인 파트너를 자동으로 매칭해드립니다. 오늘 밤 만날 수 있어요.</p>
+                <div class="hero-cta">
+                    <button class="btn btn-large btn-glow">
+                        <span>무료로 시작하기</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                    <p class="cta-note">신용카드 불필요 · 30 초 만에 가입</p>
+                </div>
+            </div>
+            
+            <!-- 스크롤 인디케이터 -->
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <span>아래로 스크롤</span>
             </div>
         </section>
 
-        <!-- 프로필 카드 섹션 -->
-        <section class="profiles">
-            <div class="section-title">
-                <h2>실제 프로필 · 생생한 소개</h2>
-                <p>👉 좌우로 스와이프하여 더 많은 프로필을 확인하세요. 만난 사람들 모두 대만족했다고 해요.</p>
+        <!-- 선호도 선택 섹션 -->
+        <section class="preferences-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">맞춤 매칭</span>
+                    <h2 class="section-title">이상형을 선택하세요</h2>
+                    <p class="section-desc">선호도를 알려주시면 가장 잘 맞는 파트너를 찾아드립니다</p>
+                </div>
+                
+                <div class="preferences-grid">
+                    <!-- 연령대 -->
+                    <div class="preference-card" data-category="age">
+                        <div class="card-icon">🎂</div>
+                        <h3 class="card-title">연령대</h3>
+                        <div class="option-buttons">
+                            <button class="option-btn active" data-value="all">전체</button>
+                            <button class="option-btn" data-value="18-24">18-24 세</button>
+                            <button class="option-btn" data-value="25-30">25-30 세</button>
+                            <button class="option-btn" data-value="31+">31 세 이상</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 스타일 -->
+                    <div class="preference-card" data-category="style">
+                        <div class="card-icon">✨</div>
+                        <h3 class="card-title">스타일</h3>
+                        <div class="option-buttons">
+                            <button class="option-btn active" data-value="all">전체</button>
+                            <button class="option-btn" data-value="cute">청순가련</button>
+                            <button class="option-btn" data-value="sexy">섹시글래머</button>
+                            <button class="option-btn" data-value="elegant">우아한</button>
+                            <button class="option-btn" data-value="girlfriend">여친룩</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 체형 -->
+                    <div class="preference-card" data-category="body">
+                        <div class="card-icon">💫</div>
+                        <h3 class="card-title">체형</h3>
+                        <div class="option-buttons">
+                            <button class="option-btn active" data-value="all">전체</button>
+                            <button class="option-btn" data-value="slim">슬림</button>
+                            <button class="option-btn" data-value="curvy">글래머</button>
+                            <button class="option-btn" data-value="athletic">운동형</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 지역 -->
+                    <div class="preference-card" data-category="location">
+                        <div class="card-icon">📍</div>
+                        <h3 class="card-title">지역</h3>
+                        <div class="option-buttons">
+                            <button class="option-btn active" data-value="all">전체</button>
+                            <button class="option-btn" data-value="gangnam">강남/서초</button>
+                            <button class="option-btn" data-value="seoul">서울</button>
+                            <button class="option-btn" data-value="busan">부산</button>
+                            <button class="option-btn" data-value="incheon">인천</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="match-cta">
+                    <button class="btn btn-large btn-match">
+                        <span>내 이상형 찾기</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </button>
+                    <p class="match-note">선호도 선택 후 30 초 만에 매칭 시작</p>
+                </div>
             </div>
-            <div class="profile-grid">
-                <div class="profile-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect fill='%23ffeaa7' width='300' height='400'/%3E%3Ctext x='150' y='200' text-anchor='middle' font-size='80'%3E👩%3C/text%3E%3C/svg%3E" alt="프로필 1">
-                    <div class="profile-info">
-                        <span class="name">지수</span>
-                        <span class="age-location">24 · 강남</span>
+        </section>
+
+        <!-- 프로필 섹션 -->
+        <section class="profiles-section" id="profiles">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">실제 회원</span>
+                    <h2 class="section-title">지금 온라인인 회원들</h2>
+                    <p class="section-desc">검증된 실제 프로필입니다. 가짜는 없습니다.</p>
+                </div>
+                
+                <div class="profiles-scroll">
+                    <div class="profile-card-featured">
+                        <div class="profile-image-wrapper">
+                            <div class="profile-placeholder" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <span>👤</span>
+                            </div>
+                            <div class="profile-status online"></div>
+                            <div class="profile-badge new">NEW</div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-header">
+                                <h3 class="profile-name">지수</h3>
+                                <span class="profile-age">24</span>
+                            </div>
+                            <p class="profile-location">📍 강남구</p>
+                            <p class="profile-bio">안녕하세요! 취미는 요리와 여행이에요 🍳✈️</p>
+                            <div class="profile-tags">
+                                <span class="tag">#청순</span>
+                                <span class="tag">#여친감</span>
+                                <span class="tag">#소통좋아요</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-profile-action">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="profile-card">
+                        <div class="profile-image-wrapper">
+                            <div class="profile-placeholder" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                                <span>👤</span>
+                            </div>
+                            <div class="profile-status online"></div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-header">
+                                <h3 class="profile-name">민아</h3>
+                                <span class="profile-age">22</span>
+                            </div>
+                            <p class="profile-location">📍 서울</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-card">
+                        <div class="profile-image-wrapper">
+                            <div class="profile-placeholder" style="background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);">
+                                <span>👤</span>
+                            </div>
+                            <div class="profile-status online"></div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-header">
+                                <h3 class="profile-name">서연</h3>
+                                <span class="profile-age">25</span>
+                            </div>
+                            <p class="profile-location">📍 부산</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-card">
+                        <div class="profile-image-wrapper">
+                            <div class="profile-placeholder" style="background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);">
+                                <span>👤</span>
+                            </div>
+                            <div class="profile-status away"></div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-header">
+                                <h3 class="profile-name">예은</h3>
+                                <span class="profile-age">23</span>
+                            </div>
+                            <p class="profile-location">📍 인천</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-card">
+                        <div class="profile-image-wrapper">
+                            <div class="profile-placeholder" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);">
+                                <span>👤</span>
+                            </div>
+                            <div class="profile-status online"></div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-header">
+                                <h3 class="profile-name">하은</h3>
+                                <span class="profile-age">26</span>
+                            </div>
+                            <p class="profile-location">📍 대구</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-card">
+                        <div class="profile-image-wrapper">
+                            <div class="profile-placeholder" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                                <span>👤</span>
+                            </div>
+                            <div class="profile-status online"></div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-header">
+                                <h3 class="profile-name">수빈</h3>
+                                <span class="profile-age">21</span>
+                            </div>
+                            <p class="profile-location">📍 광주</p>
+                        </div>
                     </div>
                 </div>
-                <div class="profile-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect fill='%23fab1a0' width='300' height='400'/%3E%3Ctext x='150' y='200' text-anchor='middle' font-size='80'%3E👩%3C/text%3E%3C/svg%3E" alt="프로필 2">
-                    <div class="profile-info">
-                        <span class="name">민아</span>
-                        <span class="age-location">22 · 서울</span>
-                    </div>
-                </div>
-                <div class="profile-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect fill='%23dfe6e9' width='300' height='400'/%3E%3Ctext x='150' y='200' text-anchor='middle' font-size='80'%3E👩%3C/text%3E%3C/svg%3E" alt="프로필 3">
-                    <div class="profile-info">
-                        <span class="name">서연</span>
-                        <span class="age-location">25 · 부산</span>
-                    </div>
-                </div>
-                <div class="profile-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect fill='%23a29bfe' width='300' height='400'/%3E%3Ctext x='150' y='200' text-anchor='middle' font-size='80'%3E👩%3C/text%3E%3C/svg%3E" alt="프로필 4">
-                    <div class="profile-info">
-                        <span class="name">예은</span>
-                        <span class="age-location">23 · 인천</span>
-                    </div>
-                </div>
-                <div class="profile-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect fill='%23fd79a8' width='300' height='400'/%3E%3Ctext x='150' y='200' text-anchor='middle' font-size='80'%3E👩%3C/text%3E%3C/svg%3E" alt="프로필 5">
-                    <div class="profile-info">
-                        <span class="name">하은</span>
-                        <span class="age-location">26 · 대구</span>
-                    </div>
-                </div>
-                <div class="profile-card">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3Crect fill='%2374b9ff' width='300' height='400'/%3E%3Ctext x='150' y='200' text-anchor='middle' font-size='80'%3E👩%3C/text%3E%3C/svg%3E" alt="프로필 6">
-                    <div class="profile-info">
-                        <span class="name">수빈</span>
-                        <span class="age-location">21 · 광주</span>
-                    </div>
+                
+                <div class="profiles-cta">
+                    <button class="btn btn-outline-large">
+                        <span>전체 프로필 보기</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </section>
 
         <!-- 특징 섹션 -->
-        <section class="features-section">
-            <div class="feature">
-                <span class="feature-icon">🔥</span>
-                <h3>남자들을 위한 최고의 낙원</h3>
-                <p>당신의 판타지를 100% 이해합니다. 말만 하지 않고 바로 만나요. 오늘 밤은 당신이 결정합니다.</p>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">🔒</span>
-                <h3>완전 익명 & 비밀 보장</h3>
-                <p>양측 모두 익명이며 안전하게 보호됩니다. 만남 후에도 미련 없이 떠날 수 있어요.被发现하고 싶지 않은 분들에게 완벽합니다.</p>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">✅</span>
-                <h3>실제 만남 100% 보장</h3>
-                <p>가짜 사진이나 봇 없음. 실제 사람들만 수동으로 선별합니다. 매칭되면 실제로 만날 수 있어요.</p>
+        <section class="features-section" id="features">
+            <div class="container">
+                <div class="section-header center">
+                    <span class="section-tag">왜 서울나이트인가</span>
+                    <h2 class="section-title">다른 점이 있습니다</h2>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <span class="feature-icon">🔒</span>
+                        </div>
+                        <h3 class="feature-title">완벽한 익명성</h3>
+                        <p class="feature-desc">본인 인증은 필수, 하지만 다른 회원에게 공개되는 정보는 당신이 선택한 것뿐입니다.</p>
+                        <ul class="feature-list">
+                            <li>✓ 얼굴 공개 여부 선택</li>
+                            <li>✓ 실명 비공개</li>
+                            <li>✓ 암호화된 채팅</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card featured">
+                        <div class="featured-badge">인기</div>
+                        <div class="feature-icon-wrapper">
+                            <span class="feature-icon">✅</span>
+                        </div>
+                        <h3 class="feature-title">100% 실제 인증</h3>
+                        <p class="feature-desc">사진 인증 + 휴대폰 인증 + AI 봇 필터링으로 가짜 프로필을 원천 차단합니다.</p>
+                        <ul class="feature-list">
+                            <li>✓ 실시간 사진 인증</li>
+                            <li>✓ AI 봇 자동 탐지</li>
+                            <li>✓ 24 시간 모니터링</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <span class="feature-icon">⚡</span>
+                        </div>
+                        <h3 class="feature-title">빠른 매칭</h3>
+                        <p class="feature-desc">복잡한 스와이프 없이, 선호도만 선택하면 AI 가 최적의 파트너를 찾아드립니다.</p>
+                        <ul class="feature-list">
+                            <li>✓ 30 초 매칭</li>
+                            <li>✓ 호환도 분석</li>
+                            <li>✓ 맞춤 추천</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- CTA 섹션 -->
         <section class="cta-section">
-            <h2>지금 시작할 준비 되셨나요? 💗</h2>
-            <p>오늘 밤 실제 사람을 만날 수 있어요. 카카오톡에 가입하고 즐거운 여정을 시작하세요.</p>
-            <button class="download-btn large">📱 데이트 앱 지금 다운로드</button>
-            <p class="disclaimer">"안내: 성인 간의 합의된 만남만을 위한 서비스입니다. 서로의 경계를 존중해주세요."</p>
+            <div class="container">
+                <div class="cta-content">
+                    <div class="cta-badge">
+                        <span>🎁</span>
+                        <span>한정 프로모션</span>
+                    </div>
+                    <h2 class="cta-title">오늘 밤이 특별한 밤이 됩니다</h2>
+                    <p class="cta-desc">지금 가입하면 프리미엄 멤버십 7 일 무료 체험</p>
+                    
+                    <div class="cta-form">
+                        <input type="tel" placeholder="휴대폰 번호" class="cta-input">
+                        <button class="btn btn-large btn-glow">무료 시작하기</button>
+                    </div>
+                    
+                    <p class="cta-privacy">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        <span>휴대폰 번호는 본인 인증용으로만 사용되며, 제 3 자와 공유되지 않습니다.</span>
+                    </p>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 30'%3E%3Ctext y='22' font-size='18' fill='%23ff4757'%3E💕%3C/text%3E%3C/svg%3E" alt="로고">
-                <p>고급 데이트 커뮤니티. 성인 전용, 익명 & 비밀 보장. 오늘 밤 만나요.</p>
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <span class="logo-icon">🌙</span>
+                        <span class="logo-text">서울나이트</span>
+                    </a>
+                    <p class="footer-desc">프리미엄 데이트 커뮤니티. 성인 전용, 익명 보장.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>서비스</h4>
+                        <a href="#">이용약관</a>
+                        <a href="#">개인정보처리방침</a>
+                        <a href="#">청소년보호정책</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>고객지원</h4>
+                        <a href="#">FAQ</a>
+                        <a href="#">1:1 문의</a>
+                        <a href="#">신고센터</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>연락처</h4>
+                        <a href="mailto:support@seoulnight.kr">support@seoulnight.kr</a>
+                        <span>평일 10:00 - 18:00</span>
+                    </div>
+                </div>
             </div>
-            <div class="footer-links">
-                <a href="#">이용약관</a>
-                <a href="#">개인정보처리방침</a>
-                <a href="#">문의하기</a>
+            
+            <div class="footer-bottom">
+                <p class="legal-warning">
+                    ⚠️ 법적 고지: 이 플랫폼은 성인 (19 세 이상) 간의 자발적인 데이트를 위한 연결 서비스만 제공하며, 
+                    금전적 거래나 성매매는 일절 없습니다. 모든 이용자는 현지 법률을 준수해야 하며, 
+                    서로의 경계와 동의를 존중해야 합니다.
+                </p>
+                <p class="copyright">© 2026 서울나이트. All rights reserved.</p>
             </div>
         </div>
-        <p class="legal-warning">"법적 고지: 이 플랫폼은 성인 간의 데이트를 위한 연결 서비스만 제공하며 금전적 거래는 일절 없습니다. 모든 만남은 자발적입니다. 현지 법률과 서로의 경계를 존중해주세요."</p>
     </footer>
 
     <script src="script.js"></script>
